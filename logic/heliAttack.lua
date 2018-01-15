@@ -3,7 +3,7 @@ heliAttack =
 	type = "heliAttack",
 	bodyOffset = 5,
 	rotorOffset = 5.1,
-			
+
 	new = function(placementEnt)
 		local baseEnt = placementEnt.surface.create_entity{name = "heli-entity-_-", force = placementEnt.force, position = placementEnt.position}
 
@@ -16,7 +16,9 @@ heliAttack =
 			rotorEntShadow = placementEnt.surface.create_entity{name = "rotor-shadow-entity-_-", force = game.forces.neutral, position = baseEnt.position},
 
 			burnerEnt = placementEnt.surface.create_entity{name = "heli-burner-entity-_-", force = game.forces.neutral, position = {x = baseEnt.position.x, y = baseEnt.position.y + 1.3}},
-		
+
+			radioEnt = placementEnt.surface.create_entity{name = "heli-radio-entity-_-", force = game.forces.neutral, position = {x = baseEnt.position.x, y = baseEnt.position.y}},
+
 			floodlightEnt = placementEnt.surface.create_entity{name = "heli-floodlight-entity-_-", force = game.forces.neutral, position = baseEnt.position},
 		}
 
@@ -35,6 +37,7 @@ heliEntityNames = heliEntityNames .. concatStrTable({
 	"heli-flying-collision-entity-_-",
 	"heli-burner-entity-_-",
 	"heli-floodlight-entity-_-",
+	"heli-radio-entity-_-",
 	"rotor-entity-_-",
 	"rotor-shadow-entity-_-",
 }, ",")

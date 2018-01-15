@@ -23,7 +23,7 @@ data:extend({
 			effectivity = 0.5,
 			emissions = 0,
 			fuel_inventory_size = 0,
-			
+
 		},
 		consumption = "3MW",
 		braking_power = "1MW",
@@ -72,7 +72,7 @@ data:extend({
 							height_in_frames = 1,
 						},
 					}
-				},	
+				},
 			}
 		},
 	},
@@ -110,7 +110,7 @@ data:extend({
 			effectivity = 0.5,
 			emissions = 0.005,
 			fuel_inventory_size = fuel_slots,
-			
+
 		},
 		consumption = "3MW",
 		braking_power = "1MW",
@@ -683,7 +683,31 @@ data:extend({
 
 
 
+----------------------radio-------------------------
 
+{
+	type = "car",
+	name = "heli-radio-entity-_-",
+	icon = "__Helicopters__/graphics/icons/heli.png",
+	icon_size = 32,
+	flags = {"not-on-map"},
+	minable = {mining_time = 1, result = "heli-item"},
+	has_belt_immunity = true,
+	max_health = 999999,
+	corpse = "medium-remnants",
+	selection_box = {{0,0},{0,0}},
+	collision_box = {{0,0},{0,0}},
+	collision_mask = {},
+	energy_per_hit_point = 1,
+
+	working_sound = {
+		sound = {
+			filename = "__Helicopters__/sound/radio.ogg",
+			volume = 0.6
+		},
+		--match_speed_to_activity = true,
+	},
+},
 
 
 ----------------------flashlight--------------------

@@ -93,7 +93,7 @@ function OnBuilt(e)
 		callInGlobal("remoteGuis", "OnHeliBuilt", newHeli)
 
 	elseif ent.name == "heli-pad-placement-entity" then
-		local newPad = insertInGlobal("heliPads", heliPad.new(ent)) 
+		local newPad = insertInGlobal("heliPads", heliPad.new(ent))
 		callInGlobal("remoteGuis", "OnHeliPadBuilt", newPad)
 	end
 end
@@ -109,7 +109,7 @@ function OnRemoved(e)
 				if val:isBaseOrChild(ent) then
 					val:destroy()
 					table.remove(global.helis, i)
-					
+
 					callInGlobal("remoteGuis", "OnHeliRemoved", val)
 				end
 			end
@@ -162,6 +162,13 @@ function OnHeliToggleFloodlight(e)
 	end
 end
 
+function OnHeliToggleMusic(e)
+	local p = game.players[e.player_index]
+	if playerIsInHeli(p) then
+		getHeliFromBaseEntity(p.vehicle):OnToggleMusic()
+	end
+end
+
 function OnPlacedEquipment(e)
 	if e.equipment.name == "heli-remote-equipment" then
 		local p = game.players[e.player_index]
@@ -199,7 +206,7 @@ function OnGuiClick(e)
 	if name:match("^heli_") then
 		local p = game.players[e.player_index]
 		local i = searchIndexInTable(global.remoteGuis, p, "player")
-		
+
 		if name == "heli_remote_btn" then
 			if not global.remoteGuis then global.remoteGuis = {} end
 
@@ -209,7 +216,7 @@ function OnGuiClick(e)
 				global.remoteGuis[i]:destroy()
 				table.remove(global.remoteGuis, i)
 			end
-		
+
 		else
 			if i then
 				global.remoteGuis[i]:OnGuiClick(e)
@@ -224,7 +231,7 @@ function OnGuiTextChanged(e)
 	if name:match("^heli_") then
 		local p = game.players[e.player_index]
 		local i = searchIndexInTable(global.remoteGuis, p, "player")
-		
+
 		if i then
 			global.remoteGuis[i]:OnGuiTextChanged(e)
 		end
@@ -233,13 +240,13 @@ end
 
 function OnPlayerChangedForce(e)
 	local p = game.players[e.player_index]
-	
+
 	callInGlobal("remoteGuis", "OnPlayerChangedForce", p)
 end
 
 function OnPlayerDied(e)
 	local p = game.players[e.player_index]
-	
+
 	setRemoteBtn(p, false)
 
 	callInGlobal("remoteGuis", "OnPlayerDied", p)
@@ -302,6 +309,7 @@ script.on_event("heli-down", OnHeliDown)
 script.on_event("heli-zaa-height-increase", OnHeliIncreaseMaxHeight)
 script.on_event("heli-zab-height-decrease", OnHeliDecreaseMaxHeight)
 script.on_event("heli-zba-toogle-floodlight", OnHeliToggleFloodlight)
+script.on_event("heli-toggle-music", OnHeliToggleMusic)
 
 
 script.on_event(defines.events.on_player_placed_equipment, OnPlacedEquipment)

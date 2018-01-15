@@ -13,68 +13,68 @@ function getHeliFromBaseEntity(ent)
 end
 
 local frameFixes = {
-	0, 			--1	
-	0.015625, 	--2	
-	0.046875, 	--3	
-	0.0625, 	--4	
-	0.078125, 	--5	
-	0.109375, 	--6	
-	0.125, 		--7	
-	0.140625, 	--8	
-	0.15625, 	--9	
-	0.171875, 	--10	
-	0.1796875, 	--11	
-	0.1875, 	--12	
-	0.203125, 	--13	
-	0.21875, 	--14	
-	0.2265625, 	--15	
-	0.234375, 	--16	
-	0.25, 		--17	
-	0.265625, 	--18	
-	0.2734375, 	--19	
-	0.28125, 	--20	
-	0.296875, 	--21	
-	0.3125, 	--22	
-	0.3203125, 	--23	
-	0.328125, 	--24	
-	0.34375, 	--25	
-	0.359375, 	--26	
-	0.375, 		--27	
-	0.390625, 	--28	
-	0.40625, 	--29	
-	0.4375, 	--30	
-	0.453125, 	--31	
-	0.46875, 	--32	
-	0.5, 		--33	
-	0.515625, 	--34	
-	0.546875, 	--35	
-	0.5625, 	--36	
-	0.578125, 	--37	
-	0.609375, 	--38	
-	0.625, 		--39	
-	0.640625, 	--40	
-	0.65625, 	--41	
-	0.671875, 	--42	
-	0.6796875, 	--43	
-	0.6875, 	--44	
-	0.703125, 	--45	
-	0.71875, 	--46	
-	0.7265625, 	--47	
-	0.734375, 	--48	
-	0.75, 		--49	
-	0.765625, 	--50	
-	0.7734375, 	--51	
-	0.78125, 	--52	
-	0.796875, 	--53	
-	0.8125, 	--54	
-	0.8203125, 	--55	
-	0.828125, 	--56	
-	0.84375, 	--57	
-	0.859375, 	--58	
-	0.875, 		--59	
-	0.890625, 	--60	
-	0.90625, 	--61	
-	0.9375, 	--62	
+	0, 			--1
+	0.015625, 	--2
+	0.046875, 	--3
+	0.0625, 	--4
+	0.078125, 	--5
+	0.109375, 	--6
+	0.125, 		--7
+	0.140625, 	--8
+	0.15625, 	--9
+	0.171875, 	--10
+	0.1796875, 	--11
+	0.1875, 	--12
+	0.203125, 	--13
+	0.21875, 	--14
+	0.2265625, 	--15
+	0.234375, 	--16
+	0.25, 		--17
+	0.265625, 	--18
+	0.2734375, 	--19
+	0.28125, 	--20
+	0.296875, 	--21
+	0.3125, 	--22
+	0.3203125, 	--23
+	0.328125, 	--24
+	0.34375, 	--25
+	0.359375, 	--26
+	0.375, 		--27
+	0.390625, 	--28
+	0.40625, 	--29
+	0.4375, 	--30
+	0.453125, 	--31
+	0.46875, 	--32
+	0.5, 		--33
+	0.515625, 	--34
+	0.546875, 	--35
+	0.5625, 	--36
+	0.578125, 	--37
+	0.609375, 	--38
+	0.625, 		--39
+	0.640625, 	--40
+	0.65625, 	--41
+	0.671875, 	--42
+	0.6796875, 	--43
+	0.6875, 	--44
+	0.703125, 	--45
+	0.71875, 	--46
+	0.7265625, 	--47
+	0.734375, 	--48
+	0.75, 		--49
+	0.765625, 	--50
+	0.7734375, 	--51
+	0.78125, 	--52
+	0.796875, 	--53
+	0.8125, 	--54
+	0.8203125, 	--55
+	0.828125, 	--56
+	0.84375, 	--57
+	0.859375, 	--58
+	0.875, 		--59
+	0.890625, 	--60
+	0.90625, 	--61
+	0.9375, 	--62
 	0.953125, 	--63
 	0.984375, 	--64
 }
@@ -119,7 +119,7 @@ heliBase = {
 	maxHeight = 5,
 	curBobbing = 0,
 
-	heightSpeed = 0, 
+	heightSpeed = 0,
 	heightAcceleration = 0.001,
 
 	maxHeightUperLimit = 20,
@@ -177,7 +177,7 @@ heliBase = {
 
 	destroy = function(self)
 		self.valid = false
-		
+
 		if self.baseEnt and self.baseEnt.valid then
 			--self.baseEnt.destroy()
 		end
@@ -248,6 +248,16 @@ heliBase = {
 		end
 	end,
 
+	OnToggleMusic = function(self)
+		self.radioEnabled = not self.radioEnabled
+
+		if self.radioEnabled then
+			self:setRadioEntities(true)
+		else
+			self:setRadioEntities(false)
+		end
+	end,
+
 	OnPlayerEjected = function(self)
 		if self.childs.collisionEnt and self.hasLandedCollider then
 			self.childs.collisionEnt.ejectPlayers()
@@ -301,7 +311,7 @@ heliBase = {
 
 	engineStarting = basicState.new({
 		name = "engineStarting",
-		
+
 		init = function(heli)
 			heli.lockedBaseOrientation = heli.baseEnt.orientation
 
@@ -333,7 +343,7 @@ heliBase = {
 
 	ascend = basicState.new({
 		name = "ascend",
-		
+
 		init = function(heli)
 			heli.baseEnt.effectivity_modifier = 1
 			heli.baseEnt.friction_modifier = 1
@@ -353,7 +363,7 @@ heliBase = {
 			--if heli.bobbingAnimator and not heli.bobbingAnimator.isDone then
 			--	heli.curBobbing = heli.bobbingAnimator:nextFrame()
 			--end
-			
+
 			if heli.height > maxCollisionHeight then
 				heli:setCollider("none")
 			end
@@ -370,7 +380,7 @@ heliBase = {
 
 	hovering = basicState.new({
 		name = "hovering",
-		
+
 		init = function(heli)
 			--heli.bobbingAnimator = basicAnimator.new(0, maxBobbing, bobbingPeriod, "cyclicSine")
 		end,
@@ -398,7 +408,7 @@ heliBase = {
 
 	descend = basicState.new({
 		name = "descend",
-		
+
 		init = function(heli)
 			local time = heli:setTargetHeight(0)
 			--heli.bobbingAnimator = basicAnimator.new(heli.curBobbing, 0, time*60, "linear")
@@ -416,7 +426,7 @@ heliBase = {
 			--if heli.bobbingAnimator and not heli.bobbingAnimator.isDone then
 			--	heli.curBobbing = heli.bobbingAnimator:nextFrame()
 			--end
-			
+
 			if heli.height <= maxCollisionHeight and not (heli.childs.collisionEnt and heli.childs.collisionEnt.valid) then
 				heli:setCollider("flying")
 			end
@@ -433,7 +443,7 @@ heliBase = {
 
 	engineStopping = basicState.new({
 		name = "engineStopping",
-		
+
 		init = function(heli)
 			heli.childs.burnerEnt.set_driver(nil)
 
@@ -521,7 +531,7 @@ heliBase = {
 
 		self.baseEnt.teleport({x = self.baseEnt.position.x, y = self.baseEnt.position.y - delta})
 
-		
+
 		if newHeight == self.targetHeight then
 			self.height = self.targetHeight
 
@@ -601,7 +611,7 @@ heliBase = {
 							self:insertIntoCar(self.baseEnt, curDriver)
 							curChild.set_driver(self.burnerDriver)
 						end
-					
+
 					elseif k == "floodlightEnt" and self.floodlightDriver then
 						if curDriver ~= self.floodlightDriver then
 							self:insertIntoCar(self.baseEnt, curDriver)
@@ -637,7 +647,7 @@ heliBase = {
 				position = self.baseEnt.position,
 				orientation = self.baseEnt.orientation,
 				force = game.forces.neutral,
-				boxLengths = 
+				boxLengths =
 				{
 					ends = 3,
 					sides = 4.8,
@@ -645,7 +655,7 @@ heliBase = {
 				nameEnds = "heli-landed-collision-end-entity-_-",
 				nameSides = "heli-landed-collision-side-entity-_-",
 			})
-			
+
 			self.childs.collisionEnt.ejectPlayers()
 			self.hasLandedCollider = true
 
@@ -691,6 +701,22 @@ heliBase = {
 		end
 	end,
 
+	setRadioEntities = function(self, enabled)
+		if enabled then
+			if not (self.childs.radioEnt and self.childs.radioEnt.valid) then
+				self.childs.radioEnt = self.surface.create_entity{name = "heli-radio-entity-_-", force = game.forces.neutral, position = self.baseEnt.position}
+			end
+
+		else
+
+			if self.childs.radioEnt and self.childs.radioEnt.valid then
+				self.childs.radioEnt.destroy()
+			end
+			self.childs.radioEnt = nil
+
+		end
+	end,
+
 	handleColliderDamage = function(self)
 		if self.childs.collisionEnt then
 			if self.childs.collisionEnt.health ~= colliderMaxHealth then
@@ -698,8 +724,8 @@ heliBase = {
 				self.baseEnt.damage(colliderMaxHealth - self.childs.collisionEnt.health, game.forces.neutral)
 
 				if not self.baseEnt.valid then --destroy event might already be executed
-					return false 
-				end 
+					return false
+				end
 				self.childs.collisionEnt.health = colliderMaxHealth
 			end
 		end
@@ -717,8 +743,8 @@ heliBase = {
 				local driver = self.baseEnt.get_driver()
 				if driver and driver.valid then
 					driver.riding_state = {acceleration = defines.riding.acceleration.accelerating, direction = defines.riding.direction.straight}
-				
-				else	
+
+				else
 					driver = self.surface.create_entity{name = "player", force = self.baseEnt.force, position = self.baseEnt.position}
 					self.baseEnt.set_driver(driver)
 					driver.riding_state = {acceleration = defines.riding.acceleration.accelerating, direction = defines.riding.direction.straight}
@@ -808,7 +834,7 @@ heliBase = {
 
 		self.childs.bodyEnt.teleport({x = basePos.x - vec[1], y = basePos.y - vec[2] + self.bodyOffset - self.curBobbing})
 		self.childs.rotorEnt.teleport({x = basePos.x - vec[1], y = basePos.y - vec[2] + self.rotorOffset - self.curBobbing})
-		
+
 		self.childs.rotorEntShadow.teleport({x = basePos.x - vec[1], y = basePos.y - vec[2] + self.height})
 		self.childs.bodyEntShadow.teleport({x = basePos.x - vec[1], y = basePos.y - vec[2] + self.height})
 
@@ -816,7 +842,7 @@ heliBase = {
 			local lightOffsetVec = math3d.vector2.mul(baseVec, self.height)
 			self.childs.floodlightEnt.teleport({x = basePos.x - vec[1] - lightOffsetVec[1], y = basePos.y - vec[2] - lightOffsetVec[2] + self.height})
 		end
-		
+
 		if self.childs.collisionEnt then
 			if not self.hasLandedCollider then
 				local initVec = {0,1}
@@ -842,7 +868,7 @@ heliBase = {
 		local center = {x = basePos.x, y = basePos.y - off}
 		local radius = 2
 		snap = self.baseEnt.orientation
-		snap = snap * (1 - math.sin(math.pi * snap)*0.05) 
+		snap = snap * (1 - math.sin(math.pi * snap)*0.05)
 		snap = math.abs(snap * 64) / 64
 		local vec = math3d.vector2.mul(math3d.vector2.rotate({0,1}, math.pi * 2 * snap), radius)
 

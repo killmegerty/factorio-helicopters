@@ -39,4 +39,11 @@ data:extend({
     key_sequence = "SHIFT + L",
     consuming = "none"
   },
+
+  {
+    type = "custom-input",
+    name = "heli-toggle-music",
+    key_sequence = "SHIFT + P",
+    consuming = "none"
+  },
 })
