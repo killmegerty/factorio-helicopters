@@ -6,10 +6,11 @@ data:extend({
 		ingredients = {
 			{"engine-unit", 150},
 			{"steel-plate", 150},
-			{"iron-gear-wheel", 250},
+			{"iron-gear-wheel", 400},
 			{"processing-unit", 250},
-			{"gun-turret", 10},
-			{"rocket-launcher", 10},
+			{"copper-plate", 100},
+			{"iron-plate", 250},
+			{"electronic-circuit", 50},
 		},
 		result = "heli-item",
 	}

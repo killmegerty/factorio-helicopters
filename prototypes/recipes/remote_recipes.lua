@@ -8,7 +8,6 @@ data:extend({
 			{"processing-unit", 40},
 			{"battery", 20},
 			{"plastic-bar", 20},
-			{"rocket-control-unit", 2},
 			{"iron-stick", 2},
 		},
 		result = "heli-remote-equipment",
